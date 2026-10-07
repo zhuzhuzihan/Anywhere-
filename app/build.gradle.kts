@@ -202,6 +202,8 @@ dependencies {
   implementation("androidx.preference:preference-ktx:1.2.1")
 
   //Google
+  // NOTE: M3 Expressive artifacts live in 1.14.x (1.13.x stable has none);
+  // do not "downgrade" to 1.13.x via automated updates. Keep with compileSdk 35.
   implementation("com.google.android.material:material:1.14.0")
 
   //Function
