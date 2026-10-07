@@ -122,10 +122,17 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
           } else {
             PackageManager.GET_DISABLED_COMPONENTS
           }
-          packageManager.getPackageArchiveInfo(
-            packageInfo.applicationInfo?.sourceDir,
-            PackageManager.GET_ACTIVITIES or pmFlag
-          )
+          // applicationInfo is nullable since compileSdk 35; without a sourceDir
+          // there is nothing to parse, so fall through to the null-safe chain below
+          val sourceDir = packageInfo.applicationInfo?.sourceDir
+          if (sourceDir == null) {
+            null
+          } else {
+            packageManager.getPackageArchiveInfo(
+              sourceDir,
+              PackageManager.GET_ACTIVITIES or pmFlag
+            )
+          }
         }
 
         appPackageInfo?.activities?.let { activities ->
