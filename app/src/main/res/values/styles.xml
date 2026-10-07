@@ -93,6 +93,19 @@
   <!-- App-owned alias so Java code can reference the M3 bodyMedium appearance
        through app R (library R.style is not reliably visible). -->
   <style name="TextAppearance.Aw.BodyMedium" parent="TextAppearance.Material3.BodyMedium" />
+  <style name="TextAppearance.Aw.BodyLarge" parent="TextAppearance.Material3.BodyLarge" />
+
+  <!-- Standalone tonal section/row cards (FolkPatch-style): 20dp rounded. -->
+  <style name="ShapeAppearance.Aw.Card20" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">20dp</item>
+  </style>
+
+  <!-- App icon display in About header. -->
+  <style name="ShapeAppearance.Aw.AppIcon" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">24dp</item>
+  </style>
 
   <style name="TextView.SansSerifBlack" parent="Widget.MaterialComponents.TextView">
     <item name="fontFamily">sans-serif-black</item>

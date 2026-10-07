@@ -1,44 +1,83 @@
 package com.absinthe.anywhere_.ui.about
 
 import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
+import com.absinthe.anywhere_.AppBarActivity
 import com.absinthe.anywhere_.BuildConfig
 import com.absinthe.anywhere_.R
 import com.absinthe.anywhere_.constants.GlobalValues
+import com.absinthe.anywhere_.databinding.ActivityAboutBinding
+import com.absinthe.anywhere_.databinding.ItemAboutCardBinding
+import com.absinthe.anywhere_.databinding.LayoutAboutHeaderBinding
 import com.absinthe.anywhere_.utils.handler.URLSchemeHandler
 import com.absinthe.anywhere_.utils.manager.DialogManager.showDebugDialog
 import com.absinthe.anywhere_.utils.manager.URLManager
 import com.absinthe.libraries.me.Absinthe
-import com.absinthe.libraries.utils.utils.UiUtils
-import com.blankj.utilcode.util.AppUtils
-import com.drakeet.about.*
-import com.drakeet.about.provided.GlideImageLoader
+import timber.log.Timber
 
-class AboutActivity : AbsAboutActivity() {
+/** M3E About screen: header + standalone tonal cards (FolkPatch-style). No drakeet dependency. */
+class AboutActivity : AppBarActivity<ActivityAboutBinding>() {
 
   private var mClickCount = 0
-  private var mStartTime: Long = 0
-  private var mEndTime: Long = 0
+  private var mStartTime = 0L
+  private var mEndTime = 0L
+  private lateinit var headerBinding: LayoutAboutHeaderBinding
+
+  override fun setViewBinding() = ActivityAboutBinding.inflate(layoutInflater)
+
+  override fun getToolBar() = binding.toolbar.toolBar
+
+  override fun getAppBarLayout() = binding.toolbar.appBar
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    initView()
-    setImageLoader(GlideImageLoader())
+    addHeader()
+    addTextCard(getString(R.string.about_text), null)
+    addRow(
+      photo = R.mipmap.pic_rabbit,
+      title = "zhuzhuzihan",
+      summary = getString(R.string.developer_info),
+      url = MAINTAINER_URL
+    )
+    addRow(
+      photo = R.mipmap.pic_android_links,
+      title = getString(R.string.android_links_title),
+      summary = "https://androidlinks.org/",
+      url = "https://androidlinks.org/"
+    )
+    addRow(
+      icon = R.drawable.ic_green_android,
+      tintIcon = false,
+      title = getString(R.string.green_android_title),
+      summary = "https://green-android.org/",
+      url = "https://green-android.org/"
+    )
+    addHtmlCard(
+      "Telegram: <a href=\"t.me/anywhereee\">t.me/anywhereee</a><br>E-mail: <a href=\"mailto:${Absinthe.EMAIL}\">${Absinthe.EMAIL}</a>"
+    )
+    LICENSES.forEach { (name, by, url) ->
+      addRow(
+        title = name,
+        summary = by,
+        url = url
+      )
+    }
   }
 
-  override fun onCreateHeader(icon: ImageView, slogan: TextView, version: TextView) {
-    icon.apply {
+  private fun addHeader() {
+    headerBinding = LayoutAboutHeaderBinding.inflate(layoutInflater, binding.container, false)
+    headerBinding.ivIcon.apply {
       if (BuildConfig.BETA) {
         setImageResource(R.mipmap.ic_launcher_beta)
       } else {
@@ -46,194 +85,87 @@ class AboutActivity : AbsAboutActivity() {
       }
       setOnClickListener(createDebugListener())
     }
-
-    slogan.text = getString(R.string.slogan)
-    version.text = String.format("Version: %s", BuildConfig.VERSION_NAME)
+    headerBinding.tvSlogan.text = getString(R.string.slogan)
+    headerBinding.tvVersion.text = String.format("Version: %s", BuildConfig.VERSION_NAME)
+    binding.container.addView(headerBinding.root)
   }
 
-  override fun onItemsCreated(items: MutableList<Any>) {
-
-    val hasInstallCoolApk = AppUtils.isAppInstalled("com.coolapk.market")
-
-    items.apply {
-      add(Category(getString(R.string.whats_this)))
-      add(Card(getString(R.string.about_text)))
-
-      add(Category(getString(R.string.developer)))
-      val developerUrl = if (hasInstallCoolApk) {
-        Absinthe.COOLAPK_HOME_PAGE
-      } else {
-        Absinthe.GITHUB_HOME_PAGE
+  private fun addRow(
+    icon: Int? = null,
+    photo: Int? = null,
+    tintIcon: Boolean = true,
+    title: String,
+    summary: String? = null,
+    url: String? = null
+  ) {
+    val row = ItemAboutCardBinding.inflate(layoutInflater, binding.container, false)
+    if (icon != null) {
+      row.ivIcon.isVisible = true
+      row.ivIcon.setImageResource(icon)
+      if (!tintIcon) {
+        row.ivIcon.imageTintList = null
       }
-      add(
-        Contributor(
-          R.mipmap.pic_rabbit,
-          "Absinthe",
-          getString(R.string.developer_info),
-          developerUrl
-        )
-      )
+    } else {
+      row.ivIcon.isVisible = false
+    }
+    if (photo != null) {
+      row.ivPhoto.isVisible = true
+      row.ivPhoto.setImageResource(photo)
+    } else {
+      row.ivPhoto.isVisible = false
+    }
+    row.tvTitle.text = title
+    if (summary != null) {
+      row.tvSummary.isVisible = true
+      row.tvSummary.text = summary
+    } else {
+      row.tvSummary.isVisible = false
+    }
+    if (url != null) {
+      row.ivChevron.isVisible = true
+      row.root.setOnClickListener { openUrl(url) }
+    }
+    binding.container.addView(row.root)
+  }
 
-      add(Category(getString(R.string.certification)))
-      add(
-        Contributor(
-          R.mipmap.pic_android_links,
-          getString(R.string.android_links_title),
-          "https://androidlinks.org/",
-          "https://androidlinks.org/"
-        )
-      )
-      add(
-        Contributor(
-          R.drawable.ic_green_android,
-          getString(R.string.green_android_title),
-          "https://green-android.org/",
-          "https://green-android.org/"
-        )
-      )
+  private fun addTextCard(body: String, url: String?) {
+    val row = ItemAboutCardBinding.inflate(layoutInflater, binding.container, false)
+    row.ivIcon.isVisible = false
+    row.ivPhoto.isVisible = false
+    row.tvTitle.setTextAppearance(R.style.TextAppearance_Aw_BodyLarge)
+    row.tvTitle.text = body
+    row.tvSummary.isVisible = false
+    if (url != null) {
+      row.ivChevron.isVisible = true
+      row.root.setOnClickListener { openUrl(url) }
+    }
+    binding.container.addView(row.root)
+  }
 
-      add(Category(getString(R.string.other_works)))
-      addAll(Absinthe.getAboutPageRecommendedApps(this@AboutActivity, BuildConfig.APPLICATION_ID))
+  private fun addHtmlCard(html: String) {
+    val row = ItemAboutCardBinding.inflate(layoutInflater, binding.container, false)
+    row.ivIcon.isVisible = false
+    row.ivPhoto.isVisible = false
+    row.tvTitle.isVisible = false
+    row.tvSummary.isVisible = true
+    row.tvSummary.text = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    row.tvSummary.movementMethod = LinkMovementMethod.getInstance()
+    binding.container.addView(row.root)
+  }
 
-      add(Category(getString(R.string.communication)))
-      add(
-        Card(
-          HtmlCompat.fromHtml(
-            "Telegram: <a href=\"t.me/anywhereee\">t.me/anywhereee</a><br>E-mail: <a href=\"mailto:${Absinthe.EMAIL}\">${Absinthe.EMAIL}</a>",
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-          )
-        )
-      )
-
-      add(Category(getString(R.string.open_source_licenses)))
-      add(License("Kotlin", "JetBrains", License.APACHE_2, "https://github.com/JetBrains/kotlin"))
-      add(License("Shizuku-API", "Rikka", License.MIT, "https://github.com/RikkaApps/Shizuku-API"))
-      add(License("Sui", "RikkaApps", License.GPL_V3, "https://github.com/RikkaApps/Sui"))
-      add(License("libsu", "topjohnwu", License.APACHE_2, "https://github.com/topjohnwu/libsu"))
-      add(License("MultiType", "drakeet", License.APACHE_2, "https://github.com/drakeet/MultiType"))
-      add(
-        License(
-          "about-page",
-          "drakeet",
-          License.APACHE_2,
-          "https://github.com/drakeet/about-page"
-        )
-      )
-      add(
-        License(
-          "FullDraggableDrawer",
-          "drakeet",
-          License.APACHE_2,
-          "https://github.com/PureWriter/FullDraggableDrawer"
-        )
-      )
-      add(
-        License(
-          "glide",
-          "bumptech",
-          "BSD, part MIT and Apache 2.0",
-          "https://github.com/bumptech/glide"
-        )
-      )
-      add(
-        License(
-          "AndResGuard",
-          "shwenzhang",
-          License.APACHE_2,
-          "https://github.com/shwenzhang/AndResGuard"
-        )
-      )
-      add(
-        License(
-          "Delegated-Scopes-Manager",
-          "heruoxin",
-          "WTFPL",
-          "https://github.com/heruoxin/Delegated-Scopes-Manager"
-        )
-      )
-      add(
-        License(
-          "IceBox-SDK",
-          "heruoxin",
-          License.APACHE_2,
-          "https://github.com/heruoxin/IceBox-SDK"
-        )
-      )
-      add(
-        License(
-          "Robfuscate",
-          "heruoxin",
-          License.APACHE_2,
-          "https://github.com/heruoxin/Robfuscate"
-        )
-      )
-      add(License("Once", "jonfinerty", License.APACHE_2, "https://github.com/jonfinerty/Once"))
-      add(
-        License(
-          "BaseRecyclerViewAdapterHelper",
-          "CymChad",
-          License.MIT,
-          "https://github.com/CymChad/BaseRecyclerViewAdapterHelper"
-        )
-      )
-      add(
-        License(
-          "colorpicker",
-          "QuadFlask",
-          License.APACHE_2,
-          "https://github.com/QuadFlask/colorpicker"
-        )
-      )
-      add(License("gson", "Google", License.APACHE_2, "https://github.com/google/gson"))
-      add(License("zxing", "zxing", License.APACHE_2, "https://github.com/zxing/zxing"))
-      add(License("AndroidX", "Google", License.APACHE_2, "https://source.google.com"))
-      add(License("Android Jetpack", "Google", License.APACHE_2, "https://source.google.com"))
-      add(License("Palette", "Google", License.APACHE_2, "https://source.google.com"))
-      add(License("OkHttp", "Square", License.APACHE_2, "https://github.com/square/okhttp"))
-      add(License("Retrofit", "Square", License.APACHE_2, "https://github.com/square/retrofit"))
-      add(License("LeakCanary", "Square", License.APACHE_2, "https://github.com/square/leakcanary"))
-      add(
-        License(
-          "timber",
-          "JakeWharton",
-          License.APACHE_2,
-          "https://github.com/JakeWharton/timber"
-        )
-      )
-      add(
-        License(
-          "RxAndroid",
-          "JakeWharton",
-          License.APACHE_2,
-          "https://github.com/ReactiveX/RxAndroid"
-        )
-      )
-      add(License("RxJava", "ReactiveX", License.APACHE_2, "https://github.com/ReactiveX/RxJava"))
-      add(
-        License(
-          "android-target-tooltip",
-          "sephiroth74",
-          License.MIT,
-          "https://github.com/sephiroth74/android-target-tooltip"
-        )
-      )
-      add(
-        License(
-          "AndroidUtilCode",
-          "Blankj",
-          License.APACHE_2,
-          "https://github.com/Blankj/AndroidUtilCode"
-        )
-      )
-      add(License("MMKV", "Tencent", "BSD 3-Clause License", "https://github.com/Tencent/MMKV"))
-      add(
-        License(
-          "AndroidHiddenApiBypass",
-          "LSPosed",
-          License.APACHE_2,
-          "https://github.com/LSPosed/AndroidHiddenApiBypass"
-        )
-      )
+  private fun openUrl(url: String) {
+    val uri = if (url.startsWith("http")) url else "https://$url"
+    try {
+      CustomTabsIntent.Builder().build().apply {
+        launchUrl(this@AboutActivity, uri.toUri())
+      }
+    } catch (e: ActivityNotFoundException) {
+      Timber.e(e)
+      try {
+        startActivity(Intent(Intent.ACTION_VIEW).apply { data = uri.toUri() })
+      } catch (e: ActivityNotFoundException) {
+        Timber.e(e)
+      }
     }
   }
 
@@ -257,15 +189,11 @@ class AboutActivity : AbsAboutActivity() {
         if (GlobalValues.sIsDebugMode) {
           try {
             val inputStream = assets.open("renge.webp")
-            findViewById<ImageView>(com.drakeet.about.R.id.icon).setImageBitmap(
-              BitmapFactory.decodeStream(
-                inputStream
-              )
+            headerBinding.ivIcon.setImageBitmap(
+              BitmapFactory.decodeStream(inputStream)
             )
-            findViewById<TextView>(com.drakeet.about.R.id.slogan).text = "えい、私もよ。"
-            setHeaderBackground(ColorDrawable(ContextCompat.getColor(this, R.color.renge)))
-            setHeaderContentScrim(ColorDrawable(ContextCompat.getColor(this, R.color.renge)))
-            window.statusBarColor = ContextCompat.getColor(this, R.color.renge)
+            headerBinding.tvSlogan.text = "えい、私もよ。"
+            window.statusBarColor = getColor(R.color.renge)
 
             val fd = assets.openFd("renge_no_koe.aac")
             MediaPlayer().apply {
@@ -274,6 +202,7 @@ class AboutActivity : AbsAboutActivity() {
               start()
             }
           } catch (e: Exception) {
+            Timber.e(e)
           }
         } else {
           GlobalValues.sIsDebugMode = true
@@ -281,11 +210,6 @@ class AboutActivity : AbsAboutActivity() {
         }
       }
     }
-  }
-
-  private fun initView() {
-    findViewById<Toolbar>(R.id.toolbar)?.background = null
-    UiUtils.setSystemBarStyle(window)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -304,5 +228,93 @@ class AboutActivity : AbsAboutActivity() {
       finish()
     }
     return super.onOptionsItemSelected(menuItem)
+  }
+
+  companion object {
+    const val MAINTAINER_URL = "https://github.com/zhuzhuzihan"
+
+    private val LICENSES = listOf(
+      Triple("Kotlin", "JetBrains · Apache 2.0", "https://github.com/JetBrains/kotlin"),
+      Triple("Shizuku-API", "Rikka · MIT", "https://github.com/RikkaApps/Shizuku-API"),
+      Triple("Sui", "RikkaApps · GPLv3", "https://github.com/RikkaApps/Sui"),
+      Triple("libsu", "topjohnwu · Apache 2.0", "https://github.com/topjohnwu/libsu"),
+      Triple("MultiType", "drakeet · Apache 2.0", "https://github.com/drakeet/MultiType"),
+      Triple(
+        "FullDraggableDrawer",
+        "drakeet · Apache 2.0",
+        "https://github.com/PureWriter/FullDraggableDrawer"
+      ),
+      Triple(
+        "glide",
+        "bumptech · BSD, part MIT and Apache 2.0",
+        "https://github.com/bumptech/glide"
+      ),
+      Triple(
+        "AndResGuard",
+        "shwenzhang · Apache 2.0",
+        "https://github.com/shwenzhang/AndResGuard"
+      ),
+      Triple(
+        "Delegated-Scopes-Manager",
+        "heruoxin · WTFPL",
+        "https://github.com/heruoxin/Delegated-Scopes-Manager"
+      ),
+      Triple(
+        "IceBox-SDK",
+        "heruoxin · Apache 2.0",
+        "https://github.com/heruoxin/IceBox-SDK"
+      ),
+      Triple(
+        "Robfuscate",
+        "heruoxin · Apache 2.0",
+        "https://github.com/heruoxin/Robfuscate"
+      ),
+      Triple("Once", "jonfinerty · Apache 2.0", "https://github.com/jonfinerty/Once"),
+      Triple(
+        "BaseRecyclerViewAdapterHelper",
+        "CymChad · MIT",
+        "https://github.com/CymChad/BaseRecyclerViewAdapterHelper"
+      ),
+      Triple("colorpicker", "QuadFlask · Apache 2.0", "https://github.com/QuadFlask/colorpicker"),
+      Triple("gson", "Google · Apache 2.0", "https://github.com/google/gson"),
+      Triple("zxing", "zxing · Apache 2.0", "https://github.com/zxing/zxing"),
+      Triple("AndroidX", "Google · Apache 2.0", "https://source.google.com"),
+      Triple("Android Jetpack", "Google · Apache 2.0", "https://source.google.com"),
+      Triple("Palette", "Google · Apache 2.0", "https://source.google.com"),
+      Triple("OkHttp", "Square · Apache 2.0", "https://github.com/square/okhttp"),
+      Triple("Retrofit", "Square · Apache 2.0", "https://github.com/square/retrofit"),
+      Triple(
+        "LeakCanary",
+        "Square · Apache 2.0",
+        "https://github.com/square/leakcanary"
+      ),
+      Triple(
+        "timber",
+        "JakeWharton · Apache 2.0",
+        "https://github.com/JakeWharton/timber"
+      ),
+      Triple(
+        "RxAndroid",
+        "JakeWharton · Apache 2.0",
+        "https://github.com/ReactiveX/RxAndroid"
+      ),
+      Triple("RxJava", "ReactiveX · Apache 2.0", "https://github.com/ReactiveX/RxJava"),
+      Triple(
+        "android-target-tooltip",
+        "sephiroth74 · MIT",
+        "https://github.com/sephiroth74/android-target-tooltip"
+      ),
+      Triple(
+        "AndroidUtilCode",
+        "Blankj · Apache 2.0",
+        "https://github.com/Blankj/AndroidUtilCode"
+      ),
+      Triple("MMKV", "Tencent · BSD 3-Clause", "https://github.com/Tencent/MMKV"),
+      Triple(
+        "AndroidHiddenApiBypass",
+        "LSPosed · Apache 2.0",
+        "https://github.com/LSPosed/AndroidHiddenApiBypass"
+      )
+    )
   }
 }

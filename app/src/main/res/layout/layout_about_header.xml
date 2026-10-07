@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- About header: centered app icon + slogan + version on surface (no brand wash). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center_horizontal"
+  android:orientation="vertical"
+  android:paddingTop="24dp"
+  android:paddingBottom="16dp">
+
+  <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/iv_icon"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:contentDescription="@string/app_name"
+    app:shapeAppearanceOverlay="@style/ShapeAppearance.Aw.AppIcon" />
+
+  <TextView
+    android:id="@+id/tv_slogan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:gravity="center"
+    android:text="@string/slogan"
+    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+    android:textColor="?attr/colorOnSurface" />
+
+  <TextView
+    android:id="@+id/tv_version"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:textAppearance="?attr/textAppearanceBodyMedium"
+    android:textColor="?attr/colorOnSurfaceVariant" />
+
+</LinearLayout>

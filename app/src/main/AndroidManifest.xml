@@ -186,8 +186,7 @@
     <activity
       android:name=".ui.about.AboutActivity"
       android:exported="false"
-      android:label="@string/about_title"
-      android:theme="@style/AppTheme.About" />
+      android:label="@string/about_title" />
 
     <!--    Shortcut bridge    -->
     <activity
