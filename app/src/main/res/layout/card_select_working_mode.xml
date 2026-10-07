@@ -18,6 +18,10 @@
       android:text="@string/title_select_working_mode"
       android:textAppearance="?attr/textAppearanceHeadlineSmall" />
 
+    <!-- M3 segmented button: single-selection toggle group whose checked fill
+         is secondaryContainer (see res/color/segmented_button_*), matching the
+         M3 segmented spec / Compose SegmentedButton. Ids and single-selection
+         behavior are unchanged, so InitializeFragment needs no edits. -->
     <com.google.android.material.button.MaterialButtonToggleGroup
       android:id="@+id/toggle_group"
       android:layout_width="wrap_content"
@@ -32,21 +36,27 @@
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_normal" />
+        android:text="@string/btn_normal"
+        android:textColor="@color/segmented_button_label"
+        app:backgroundTint="@color/segmented_button_container" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_root"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_root" />
+        android:text="@string/btn_root"
+        android:textColor="@color/segmented_button_label"
+        app:backgroundTint="@color/segmented_button_container" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_shizuku"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_shizuku" />
+        android:text="@string/btn_shizuku"
+        android:textColor="@color/segmented_button_label"
+        app:backgroundTint="@color/segmented_button_container" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
