@@ -15,7 +15,7 @@
     layout="@layout/toolbar" />
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
-    style="@style/Widget.Material3Expressive.LinearProgressIndicator"
+    style="@style/Widget.Material3Expressive.LinearProgressIndicator.Wavy"
     android:id="@+id/progress_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

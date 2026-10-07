@@ -5,7 +5,7 @@
   android:layout_height="wrap_content">
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
-    style="@style/Widget.Material3Expressive.LinearProgressIndicator"
+    style="@style/Widget.Material3Expressive.LinearProgressIndicator.Wavy"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
