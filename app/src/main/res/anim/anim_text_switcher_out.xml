@@ -3,5 +3,6 @@
   <translate
     android:duration="300"
     android:fromYDelta="0%p"
+    android:interpolator="@interpolator/m3_emphasized_accelerate"
     android:toYDelta="-100%p" />
 </set>
