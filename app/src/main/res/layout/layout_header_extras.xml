@@ -20,7 +20,7 @@
     android:background="?attr/selectableItemBackgroundBorderless"
     android:importantForAccessibility="no"
     android:src="@drawable/ic_add"
-    android:tint="@color/textColorNormal"
+    android:tint="?attr/colorOnSurfaceVariant"
     android:tooltipText="@string/add"
     tools:targetApi="o" />
 
