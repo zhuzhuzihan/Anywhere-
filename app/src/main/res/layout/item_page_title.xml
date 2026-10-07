@@ -41,7 +41,6 @@
     android:paddingBottom="6dp"
     android:textAppearance="?attr/textAppearanceListItemSmall"
     android:textColor="?attr/colorOnSurface"
-    android:textStyle="bold"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/iv_arrow"

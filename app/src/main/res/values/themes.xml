@@ -36,6 +36,7 @@
     <!-- App-owned alias of ?attr/colorSurfaceContainerHighest for Java-side
          tonal lookups (MaterialColors) without touching material R. -->
     <item name="awSurfaceContainerHighest">?attr/colorSurfaceContainerHighest</item>
+    <item name="awOnInverseSurface">?attr/colorOnSurfaceInverse</item>
   </style>
 
   <style name="Theme" parent="Base.AppTheme" />

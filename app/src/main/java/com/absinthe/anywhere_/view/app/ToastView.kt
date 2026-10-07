@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.absinthe.anywhere_.R
 import com.absinthe.libchecker.view.AViewGroup
+import com.google.android.material.color.MaterialColors
 
 class ToastView(context: Context) : AViewGroup(context) {
 
@@ -16,8 +17,14 @@ class ToastView(context: Context) : AViewGroup(context) {
       LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     maxWidth = 300.dp
     gravity = Gravity.CENTER
-    setTextAppearance(android.R.style.TextAppearance_Material_Body2)
-    setTextColor(Color.BLACK)
+    setTextAppearance(R.style.TextAppearance_Material3_BodyMedium)
+    setTextColor(
+      MaterialColors.getColor(
+        context,
+        R.attr.awOnInverseSurface,
+        Color.WHITE
+      )
+    )
     val padding = 12.dp
     setPadding(padding, padding, padding, padding)
     setBackgroundResource(R.drawable.bg_toast)

@@ -29,7 +29,6 @@
     android:gravity="center"
     android:maxLines="1"
     android:textAppearance="?attr/textAppearanceTitleSmall"
-    android:textStyle="bold"
     tools:text="Image" />
 
 </LinearLayout>

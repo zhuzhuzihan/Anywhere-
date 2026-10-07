@@ -13,4 +13,6 @@
   <attr name="awColorPrimary" format="color" />
   <!-- Alias target for Java-side tonal lookups; value set in Base.AppTheme. -->
   <attr name="awSurfaceContainerHighest" format="color" />
+  <!-- Alias target for the toast/snackbar-style label; value set in Base.AppTheme. -->
+  <attr name="awOnInverseSurface" format="color" />
 </resources>

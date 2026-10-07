@@ -67,7 +67,6 @@
     android:layout_marginTop="16dp"
     android:background="?attr/colorSurfaceContainerHighest"
     android:clickable="false"
-    android:textStyle="bold"
     app:layout_constraintBottom_toTopOf="@id/tv_card_type"
     app:layout_constraintStart_toEndOf="@id/iv_type"
     app:layout_constraintTop_toTopOf="parent"
