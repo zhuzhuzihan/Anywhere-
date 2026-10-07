@@ -1,6 +1,5 @@
 import com.android.build.api.component.analytics.AnalyticsEnabledApplicationVariant
 import com.android.build.api.variant.impl.ApplicationVariantImpl
-import java.nio.file.Paths
 
 plugins {
   id("com.android.application")
@@ -119,16 +118,17 @@ repositories {
 }
 
 val optimizeReleaseRes: Task = task("optimizeReleaseRes").doLast {
+  // AGP moves this intermediate between versions; locate it instead of hardcoding.
+  val intermediates = layout.buildDirectory.dir("intermediates").get().asFile
+  val zip = intermediates.walkTopDown()
+    .firstOrNull { it.isFile && it.name == "resources-release-optimize.ap_" }
+  if (zip == null) {
+    logger.warn("optimizeReleaseRes: resources-release-optimize.ap_ not found under $intermediates, skipping aapt2 collapse.")
+    return@doLast
+  }
   val aapt2 = File(
     androidComponents.sdkComponents.sdkDirectory.get().asFile,
     "build-tools/${project.android.buildToolsVersion}/aapt2"
-  )
-  val zip = Paths.get(
-    buildDir.path,
-    "intermediates",
-    "optimized_processed_res",
-    "release",
-    "resources-release-optimize.ap_"
   )
   val optimized = File("${zip}.opt")
   val cmd = exec {
@@ -142,8 +142,8 @@ val optimizeReleaseRes: Task = task("optimizeReleaseRes").doLast {
     isIgnoreExitValue = false
   }
   if (cmd.exitValue == 0) {
-    delete(zip)
-    optimized.renameTo(zip.toFile())
+    zip.delete()
+    optimized.renameTo(zip)
   }
 }
 
