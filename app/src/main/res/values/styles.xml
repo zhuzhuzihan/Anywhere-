@@ -90,6 +90,10 @@
     <item name="fontFamily">sans-serif</item>
   </style>
 
+  <!-- App-owned alias so Java code can reference the M3 bodyMedium appearance
+       through app R (library R.style is not reliably visible). -->
+  <style name="TextAppearance.Aw.BodyMedium" parent="TextAppearance.Material3.BodyMedium" />
+
   <style name="TextView.SansSerifBlack" parent="Widget.MaterialComponents.TextView">
     <item name="fontFamily">sans-serif-black</item>
   </style>

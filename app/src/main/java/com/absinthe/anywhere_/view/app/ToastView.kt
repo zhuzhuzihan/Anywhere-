@@ -17,7 +17,7 @@ class ToastView(context: Context) : AViewGroup(context) {
       LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     maxWidth = 300.dp
     gravity = Gravity.CENTER
-    setTextAppearance(R.style.TextAppearance_Material3_BodyMedium)
+    setTextAppearance(R.style.TextAppearance_Aw_BodyMedium)
     setTextColor(
       MaterialColors.getColor(
         context,
