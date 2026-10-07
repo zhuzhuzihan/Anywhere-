@@ -7,7 +7,7 @@
   android:layout_marginVertical="@dimen/bsd_margin_vertical"
   android:background="@color/transparent">
 
-  <Button
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_url_scheme_community"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_app_name"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -39,7 +39,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_url_scheme"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -61,7 +61,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_dynamic_params"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -82,7 +82,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_description"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"

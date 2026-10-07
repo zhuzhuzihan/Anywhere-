@@ -11,7 +11,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_app_name"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/bsd_text_input_layout_app_name_label"
@@ -32,7 +32,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_description"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -53,7 +53,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_intent_action"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -73,7 +73,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_intent_package"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -93,7 +93,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_intent_class"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -113,7 +113,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_intent_data"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"

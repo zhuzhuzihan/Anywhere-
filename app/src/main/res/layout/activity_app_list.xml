@@ -15,6 +15,7 @@
     layout="@layout/toolbar" />
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
+    style="@style/Widget.Material3Expressive.LinearProgressIndicator"
     android:id="@+id/progress_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -38,10 +39,10 @@
 
   <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     android:id="@+id/extended_fab"
+    style="@style/Widget.Material3Expressive.ExtendedFloatingActionButton.Medium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|end"
-    android:backgroundTint="@color/green_done"
     android:text="@string/menu_add_manually"
     app:icon="@drawable/ic_add" />
 

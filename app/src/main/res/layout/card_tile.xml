@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+  style="@style/Widget.Material3.CardView.Filled" xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/tile_card"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_margin="@dimen/cardview_spacing"
-  android:clickable="false"
-  app:cardElevation="3dp">
+  android:clickable="false">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/relativeLayout"
@@ -20,7 +20,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/cardview_item_margin"
       android:layout_marginTop="@dimen/cardview_item_margin"
-      android:textAppearance="?attr/textAppearanceHeadline6"
+      android:textAppearance="?attr/textAppearanceHeadlineSmall"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Tile" />

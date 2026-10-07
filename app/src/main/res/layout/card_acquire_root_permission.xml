@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+  style="@style/Widget.Material3.CardView.Filled" xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/cv_acquire_root_permission"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_margin="@dimen/cardview_margin"
-  android:elevation="@dimen/cardview_elevation"
   app:layout_constraintTop_toTopOf="parent">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/title_acquire_root_permission"
-      android:textAppearance="?attr/textAppearanceHeadline6"
+      android:textAppearance="?attr/textAppearanceHeadlineSmall"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:ignore="RelativeOverlap" />
@@ -41,12 +41,12 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/cardview_item_margin"
       android:text="@string/subtitle_acquire_root_permission"
-      android:textAppearance="?attr/textAppearanceSubtitle1"
+      android:textAppearance="?attr/textAppearanceTitleMedium"
       android:textStyle="italic"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/btn_acquire_root_permission"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

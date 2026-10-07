@@ -5,10 +5,10 @@
   android:layout_height="wrap_content">
 
   <com.google.android.material.card.MaterialCardView
+  style="@style/Widget.Material3.CardView.Outlined"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardElevation="3dp">
+    android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         android:id="@+id/tv_create_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 

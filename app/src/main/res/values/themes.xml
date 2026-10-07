@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="Platform.V23.Theme.Anywhere" parent="Theme.Material3.Light.Anywhere" />
+  <style name="Platform.V23.Theme.Anywhere" parent="Theme.Material3Expressive.Light.Anywhere" />
 
   <style name="Platform.Theme.Anywhere" parent="Platform.V23.Theme.Anywhere" />
 
@@ -9,6 +9,18 @@
     <item name="preferenceTheme">@style/PreferenceThemeOverlay.Rikka.Material3</item>
     <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
     <item name="dropDownListViewStyle">@style/Widget.Aw.PopupMenu</item>
+
+    <!-- M3 Expressive defaults (explicit so the intent survives theme-overlay changes).
+         Only verified 1.14.0 style names are listed; the base
+         Theme.Material3Expressive.* already supplies expressive defaults
+         for search/slider/progress/topAppBar/navigation. -->
+    <item name="materialButtonStyle">@style/Widget.Material3Expressive.Button</item>
+    <item name="materialButtonOutlinedStyle">@style/Widget.Material3Expressive.Button.OutlinedButton</item>
+    <item name="materialButtonTonalStyle">@style/Widget.Material3Expressive.Button.TonalButton</item>
+    <item name="borderlessButtonStyle">@style/Widget.Material3Expressive.Button.TextButton</item>
+    <item name="floatingActionButtonStyle">@style/Widget.Material3Expressive.FloatingActionButton</item>
+    <item name="extendedFloatingActionButtonStyle">@style/Widget.Material3Expressive.ExtendedFloatingActionButton.Medium</item>
+    <item name="materialButtonToggleGroupStyle">@style/Widget.Material3Expressive.MaterialButtonToggleGroup</item>
 
     <item name="android:windowActionBar">false</item>
     <item name="android:windowNoTitle">true</item>

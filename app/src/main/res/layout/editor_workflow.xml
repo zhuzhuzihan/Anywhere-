@@ -17,7 +17,7 @@
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_add_node"
-    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    style="@style/Widget.Material3Expressive.Button.OutlinedButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_margin_vertical"
@@ -26,7 +26,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_description"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"
@@ -46,7 +46,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/til_app_name"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bsd_item_margin_vertical"

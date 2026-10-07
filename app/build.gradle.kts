@@ -14,14 +14,14 @@ val verName = "2.5.5"
 val verCode = 2050500
 
 android {
-  compileSdk = 34
+  compileSdk = 35
   ndkVersion = "25.0.8775105"
 
   defaultConfig {
     applicationId = "com.absinthe.anywhere_"
     namespace = "com.absinthe.anywhere_"
-    minSdk = 23
-    targetSdk = 33
+    minSdk = 26
+    targetSdk = 35
     versionCode = verCode
     versionName = verName
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -105,10 +105,10 @@ materialThemeBuilder {
   themes {
     create("anywhere") {
       primaryColor = "#8BC34A"
-      lightThemeFormat = "Theme.Material3.Light.%s"
-      lightThemeParent = "Theme.Material3.Light.Rikka"
-      darkThemeFormat = "Theme.Material3.Dark.%s"
-      darkThemeParent = "Theme.Material3.Dark.Rikka"
+      lightThemeFormat = "Theme.Material3Expressive.Light.%s"
+      lightThemeParent = "Theme.Material3Expressive.Light.NoActionBar"
+      darkThemeFormat = "Theme.Material3Expressive.Dark.%s"
+      darkThemeParent = "Theme.Material3Expressive.Dark.NoActionBar"
     }
   }
   generatePalette = true
@@ -202,7 +202,7 @@ dependencies {
   implementation("androidx.preference:preference-ktx:1.2.1")
 
   //Google
-  implementation("com.google.android.material:material:1.9.0")
+  implementation("com.google.android.material:material:1.14.0")
 
   //Function
   implementation("com.github.bumptech.glide:glide:4.16.0")
