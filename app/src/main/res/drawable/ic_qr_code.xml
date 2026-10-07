@@ -1,33 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="1024"
-    android:viewportHeight="1024">
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="960"
+  android:viewportHeight="960"
+  android:tint="?attr/colorControlNormal">
+  <!-- Material Symbols Rounded (weight 400): qr_code. 960-grid, y-down; shifted down 960. Path verbatim from upstream SVG. -->
+  <group android:translateY="960">
     <path
-        android:fillColor="#FF000000"
-        android:pathData="M640,128l0,256 256,0L896,128 640,128zM816,304l-96,0 0,-96 96,0L816,304z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M128,464l128,0 0,96 -128,0 0,-96Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M800,464l96,0 0,96 -96,0 0,-96Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M464,816 L464,896 560,896 560,832 704,832 704,736 464,736Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M464,128l96,0 0,256 -96,0 0,-256Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M800,656l96,0 0,240 -96,0 0,-240Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M128,896l256,0 0,-256L128,640 128,896zM208,720l96,0 0,96 -96,0L208,720z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M384,128 L128,128l0,256 256,0L384,128zM304,304l-96,0 0,-96 96,0L304,304z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M560,464 L464,464 368,464 368,560 464,560 464,656 560,656 800,656 800,560 560,560Z" />
+      android:fillColor="#FF000000"
+      android:pathData="M120-540v-270q0-12.75 8.63-21.38Q137.25-840 150-840h270q12.75 0 21.38 8.62Q450-822.75 450-810v270q0 12.75-8.62 21.37Q432.75-510 420-510H150q-12.75 0-21.37-8.63Q120-527.25 120-540Zm60-30h210v-210H180v210Zm-60 420v-270q0-12.75 8.63-21.38Q137.25-450 150-450h270q12.75 0 21.38 8.62Q450-432.75 450-420v270q0 12.75-8.62 21.37Q432.75-120 420-120H150q-12.75 0-21.37-8.63Q120-137.25 120-150Zm60-30h210v-210H180v210Zm330-360v-270q0-12.75 8.63-21.38Q527.25-840 540-840h270q12.75 0 21.38 8.62Q840-822.75 840-810v270q0 12.75-8.62 21.37Q822.75-510 810-510H540q-12.75 0-21.37-8.63Q510-527.25 510-540Zm60-30h210v-210H570v210Zm188 450v-82h82v82h-82ZM510-367v-83h82v83h-82Zm82 82v-82h83v82h-83Zm-82 83v-83h82v83h-82Zm82 82v-82h83v82h-83Zm83-82v-83h83v83h-83Zm0-165v-83h83v83h-83Zm83 82v-82h82v82h-82Z" />
+  </group>
 </vector>

@@ -1,13 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="1024"
-    android:viewportHeight="1024"
-    android:tint="?attr/colorControlNormal">
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="960"
+  android:viewportHeight="960"
+  android:tint="?attr/colorControlNormal">
+  <!-- Material Symbols Rounded (weight 400): lock. 960-grid, y-down; shifted down 960. Path verbatim from upstream SVG. -->
+  <group android:translateY="960">
     <path
-        android:fillColor="#FF000000"
-        android:pathData="M448,569.6 L550.4,569.6 576,454.4 473.6,454.4Z" />
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M896,64 L128,64C96,64 64,96 64,128l0,768c0,38.4 32,64 64,64l768,0c38.4,0 64,-25.6 64,-64L960,128C960,96 934.4,64 896,64zM729.6,454.4 L627.2,454.4 601.6,569.6l108.8,0L704,620.8 595.2,620.8l-32,160L505.6,780.8l32,-160L441.6,620.8l-32,160L352,780.8 384,620.8 281.6,620.8l6.4,-44.8 102.4,0 25.6,-121.6L313.6,454.4 320,409.6l108.8,0 32,-160 51.2,0L486.4,409.6l102.4,0 32,-160 51.2,0L640,409.6l102.4,0L729.6,454.4z" />
+      android:fillColor="#FF000000"
+      android:pathData="M220-80q-24.75 0-42.37-17.63Q160-115.25 160-140v-434q0-24.75 17.63-42.38Q195.25-634 220-634h70v-96q0-78.85 55.61-134.42Q401.21-920 480.11-920q78.89 0 134.39 55.58Q670-808.85 670-730v96h70q24.75 0 42.38 17.62Q800-598.75 800-574v434q0 24.75-17.62 42.37Q764.75-80 740-80H220Zm0-60h520v-434H220v434Zm314.5-162.03Q557-324.06 557-355q0-30-22.67-54.5t-54.5-24.5q-31.83 0-54.33 24.5t-22.5 55q0 30.5 22.67 52.5t54.5 22q31.83 0 54.33-22.03ZM350-634h260v-96q0-54.17-37.88-92.08-37.88-37.92-92-37.92T388-822.08q-38 37.91-38 92.08v96ZM220-140v-434 434Z" />
+  </group>
 </vector>

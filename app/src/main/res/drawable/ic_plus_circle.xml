@@ -1,12 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="1024"
-    android:viewportHeight="1024">
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="960"
+  android:viewportHeight="960"
+  android:tint="?attr/colorControlNormal">
+  <!-- Material Symbols Rounded (weight 400): add_circle. 960-grid, y-down; shifted down 960. Path verbatim from upstream SVG. -->
+  <group android:translateY="960">
     <path
-        android:fillColor="@color/textColorNormal"
-        android:pathData="M554.67,341.33h-85.33v128H341.33v85.33h128v128h85.33v-128h128v-85.33h-128z" />
-    <path
-        android:fillColor="@color/textColorNormal"
-        android:pathData="M512,85.33C276.74,85.33 85.33,276.74 85.33,512s191.4,426.67 426.67,426.67 426.67,-191.4 426.67,-426.67S747.26,85.33 512,85.33zM512,853.33c-188.2,0 -341.33,-153.13 -341.33,-341.33s153.13,-341.33 341.33,-341.33 341.33,153.13 341.33,341.33 -153.13,341.33 -341.33,341.33z" />
+      android:fillColor="#FF000000"
+      android:pathData="M453-446v136q0 12.75 8.68 21.37 8.67 8.63 21.5 8.63 12.82 0 21.32-8.63 8.5-8.62 8.5-21.37v-136h137q12.75 0 21.38-8.68 8.62-8.67 8.62-21.5 0-12.82-8.62-21.32-8.63-8.5-21.38-8.5H513v-144q0-12.75-8.68-21.38-8.67-8.62-21.5-8.62-12.82 0-21.32 8.62-8.5 8.63-8.5 21.38v144H310q-12.75 0-21.37 8.68-8.63 8.67-8.63 21.5 0 12.82 8.63 21.32 8.62 8.5 21.37 8.5h143Zm27.27 366q-82.74 0-155.5-31.5Q252-143 197.5-197.5t-86-127.34Q80-397.68 80-480.5t31.5-155.66Q143-709 197.5-763t127.34-85.5Q397.68-880 480.5-880t155.66 31.5Q709-817 763-763t85.5 127Q880-563 880-480.27q0 82.74-31.5 155.5Q817-252 763-197.68q-54 54.31-127 86Q563-80 480.27-80Zm.23-60Q622-140 721-239.5t99-241Q820-622 721.19-721T480-820q-141 0-240.5 98.81T140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z" />
+  </group>
 </vector>

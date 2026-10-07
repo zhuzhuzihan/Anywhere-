@@ -180,7 +180,7 @@ object NotifyUtils {
     ) { param: NotificationCompat.Builder ->
       param.setContentTitle(context.getString(R.string.notification_workflow_title))
         .setContentText(context.getString(R.string.notification_workflow_content))
-        .setSmallIcon(R.drawable.ic_card_workflow)
+        .setSmallIcon(R.drawable.ic_notification_workflow)
         .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
         .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
