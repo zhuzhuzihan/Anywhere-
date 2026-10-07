@@ -67,6 +67,15 @@ jobs:
         with:
           name: mappings
           path: "app/build/outputs/mapping/release"
+      # Forks never reach the sign step (gated on upstream repo + secrets),
+      # so upload the unsigned release APK there instead. Unsigned APKs
+      # cannot be installed directly — they are for inspection/smoke tests.
+      - name: Upload unsigned release apk
+        if: success() && steps.sign.conclusion == 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-unsigned
+          path: "app/build/outputs/apk/release/*.apk"
       - name: Get apk info
         if: success() && github.event_name != 'pull_request' && github.repository == 'zhaobozhen/Anywhere-'
         id: apk-info
