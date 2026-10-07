@@ -1,17 +1,14 @@
 package com.absinthe.anywhere_.ui.list
 
-import android.animation.LayoutTransition
-import android.app.SearchManager
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
-import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.absinthe.anywhere_.AppBarActivity
 import com.absinthe.anywhere_.R
@@ -38,8 +35,7 @@ import rikka.widget.borderview.BorderView
 
 const val EXTRA_APP_DETAIL_ENTRY_MODE = "EXTRA_APP_DETAIL_ENTRY_MODE"
 
-class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
-  SearchView.OnQueryTextListener {
+class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>() {
 
   private var mAdapter: AppListAdapter = AppListAdapter(MODE_APP_DETAIL)
   private var isListReady = false
@@ -62,6 +58,11 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
         initData(packageName)
       }
     } ?: finish()
+
+    binding.toolbar.tilSearch.isVisible = false
+    binding.toolbar.etSearch.doOnTextChanged { text, _, _, _ ->
+      doFilter(text.toString())
+    }
   }
 
   private fun initRecyclerView() {
@@ -180,8 +181,7 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
         withContext(Dispatchers.Main) {
           mAdapter.setDiffNewData(mItems) {
             isListReady = true
-            getToolBar().menu?.findItem(R.id.search)?.isVisible = true
-            invalidateOptionsMenu()
+            binding.toolbar.tilSearch.isVisible = true
             binding.progressHorizontal.hide()
             binding.vfContainer.displayedChild = 0
           }
@@ -192,25 +192,6 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.app_detail_menu, menu)
-
-    val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-    val searchView = menu.findItem(R.id.search).actionView as SearchView
-
-    searchView.apply {
-      findViewById<LinearLayout>(androidx.appcompat.R.id.search_bar)?.layoutTransition =
-        LayoutTransition()
-      isSubmitButtonEnabled = true // Display "Start search" button
-      isQueryRefinementEnabled = true
-      setIconifiedByDefault(false)
-      setSearchableInfo(searchManager.getSearchableInfo(componentName))
-      setOnQueryTextListener(this@AppDetailActivity)
-    }
-
-    if (!isListReady) {
-      menu.findItem(R.id.search).isVisible = false
-      invalidateOptionsMenu()
-    }
-
     return true
   }
 
@@ -231,11 +212,7 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
     return super.onOptionsItemSelected(item)
   }
 
-  override fun onQueryTextSubmit(query: String): Boolean {
-    return false
-  }
-
-  override fun onQueryTextChange(newText: String): Boolean {
+  private fun doFilter(newText: String) {
     val filter = mItems.filter {
       it.appName.contains(newText, ignoreCase = true) || it.className.contains(
         newText,
@@ -243,7 +220,6 @@ class AppDetailActivity : AppBarActivity<ActivityAppDetailBinding>(),
       )
     }
     mAdapter.setDiffNewData(filter.toMutableList())
-    return false
   }
 
 }

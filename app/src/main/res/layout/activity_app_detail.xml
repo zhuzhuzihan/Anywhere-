@@ -12,30 +12,30 @@
 
   <include
     android:id="@+id/toolbar"
-    layout="@layout/toolbar" />
+    layout="@layout/toolbar_search" />
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
     style="@style/Widget.Material3Expressive.LinearProgressIndicator"
     android:id="@+id/progress_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?actionBarSize"
     android:indeterminate="true"
     android:visibility="gone"
     app:hideAnimationBehavior="outward"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     app:layout_fitsSystemWindowsInsets="top" />
 
   <ViewFlipper
     android:id="@+id/vf_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <rikka.widget.borderview.BorderRecyclerView
       android:id="@+id/list"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clipToPadding="false"
-      android:paddingTop="?actionBarSize"
       android:scrollbars="none"
       app:borderBottomVisibility="never"
       app:borderTopDrawable="@null"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activity_list_empty_title"
-        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

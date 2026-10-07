@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textAppearance="?attr/textAppearanceBody2"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
         app:layout_constraintTop_toBottomOf="@id/tv_create_time" />
 
       <TextView
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textAppearance="?attr/textAppearanceBody2"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
         app:layout_constraintTop_toBottomOf="@id/tv_file_path" />
 
       <com.google.android.material.button.MaterialButton

@@ -12,17 +12,17 @@
 
   <include
     android:id="@+id/toolbar"
-    layout="@layout/toolbar" />
+    layout="@layout/toolbar_search" />
 
   <com.google.android.material.progressindicator.LinearProgressIndicator
     style="@style/Widget.Material3Expressive.LinearProgressIndicator"
     android:id="@+id/progress_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?actionBarSize"
     android:indeterminate="true"
     android:visibility="gone"
     app:hideAnimationBehavior="outward"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     app:layout_fitsSystemWindowsInsets="top" />
 
   <rikka.widget.borderview.BorderRecyclerView
@@ -30,12 +30,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    android:paddingTop="?actionBarSize"
     android:scrollbars="none"
     app:borderBottomVisibility="never"
     app:borderTopDrawable="@null"
     app:borderTopVisibility="whenTop"
-    app:fitsSystemWindowsInsets="bottom|top" />
+    app:fitsSystemWindowsInsets="bottom|top"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
   <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     android:id="@+id/extended_fab"

@@ -1,14 +1,11 @@
 package com.absinthe.anywhere_.ui.list
 
-import android.animation.LayoutTransition
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
-import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.absinthe.anywhere_.AppBarActivity
@@ -40,7 +37,7 @@ const val EXTRA_PACKAGE_NAME = "EXTRA_PACKAGE_NAME"
 const val MODE_NORMAL = 0
 const val MODE_SELECT = 1
 
-class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQueryTextListener {
+class AppListActivity : AppBarActivity<ActivityAppListBinding>() {
 
   private var mItems = mutableListOf<AppListBean>()
   private var initDataJob: Job? = null
@@ -63,18 +60,7 @@ class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQ
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.app_list_menu, menu)
 
-    val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-    val searchView = menu.findItem(R.id.search).actionView as SearchView
     val showSystemApp = menu.findItem(R.id.show_system_app)
-    searchView.findViewById<LinearLayout>(androidx.appcompat.R.id.search_bar)?.layoutTransition =
-      LayoutTransition()
-
-    searchView.apply {
-      isQueryRefinementEnabled = true
-      setIconifiedByDefault(false)
-      setSearchableInfo(searchManager.getSearchableInfo(componentName))
-      setOnQueryTextListener(this@AppListActivity)
-    }
 
     // Bug of DayNight lib
     showSystemApp?.apply {
@@ -87,9 +73,7 @@ class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQ
       )
     }
 
-    if (!isDataInit) {
-      menu.findItem(R.id.search).isVisible = false
-    }
+    binding.toolbar.tilSearch.isVisible = isDataInit
 
     return true
   }
@@ -112,6 +96,9 @@ class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQ
 
   override fun initView() {
     super.initView()
+    binding.toolbar.etSearch.doOnTextChanged { text, _, _, _ ->
+      doFilter(text.toString())
+    }
     binding.extendedFab.apply {
       post {
         translationY =
@@ -185,16 +172,12 @@ class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQ
       withContext(Dispatchers.Main) {
         mAdapter.setDiffNewData(mItems)
         binding.progressHorizontal.hide()
-        getToolBar().menu?.findItem(R.id.search)?.isVisible = true
+        binding.toolbar.tilSearch.isVisible = true
       }
     }
   }
 
-  override fun onQueryTextSubmit(query: String): Boolean {
-    return false
-  }
-
-  override fun onQueryTextChange(newText: String): Boolean {
+  private fun doFilter(newText: String) {
     val filter = mItems.filter {
       it.appName.contains(newText, ignoreCase = true) || it.packageName.contains(
         newText,
@@ -202,6 +185,5 @@ class AppListActivity : AppBarActivity<ActivityAppListBinding>(), SearchView.OnQ
       )
     }
     mAdapter.setDiffNewData(filter.toMutableList())
-    return false
   }
 }

@@ -1,20 +1,14 @@
 package com.absinthe.anywhere_.ui.cloud
 
-import android.animation.LayoutTransition
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.widget.LinearLayout
-import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.absinthe.anywhere_.AppBarActivity
-import com.absinthe.anywhere_.R
 import com.absinthe.anywhere_.adapter.cloud.CloudRulesAdapter
 import com.absinthe.anywhere_.adapter.manager.WrapContentLinearLayoutManager
 import com.absinthe.anywhere_.api.ApiManager
 import com.absinthe.anywhere_.api.RuleApi
-import com.absinthe.anywhere_.constants.GlobalValues
 import com.absinthe.anywhere_.databinding.ActivityCloudRulesBinding
 import com.absinthe.anywhere_.model.cloud.RuleEntity
 import com.absinthe.anywhere_.utils.manager.DialogManager
@@ -27,8 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import rikka.widget.borderview.BorderView
 import timber.log.Timber
 
-class CloudRulesActivity : AppBarActivity<ActivityCloudRulesBinding>(),
-  SearchView.OnQueryTextListener {
+class CloudRulesActivity : AppBarActivity<ActivityCloudRulesBinding>() {
 
   private val mAdapter = CloudRulesAdapter()
   private var mList = listOf<RuleEntity>()
@@ -46,6 +39,10 @@ class CloudRulesActivity : AppBarActivity<ActivityCloudRulesBinding>(),
   }
 
   override fun initView() {
+    binding.toolbar.tilSearch.isVisible = false
+    binding.toolbar.etSearch.doOnTextChanged { text, _, _, _ ->
+      doFilter(text.toString())
+    }
     binding.list.apply {
       layoutManager = WrapContentLinearLayoutManager(this@CloudRulesActivity)
       adapter = mAdapter
@@ -68,50 +65,11 @@ class CloudRulesActivity : AppBarActivity<ActivityCloudRulesBinding>(),
     }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.cloud_rules_menu, menu)
-
-    val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-    val searchView = menu.findItem(R.id.search).actionView as SearchView
-    val showSystemApp = menu.findItem(R.id.show_system_app)
-    searchView.findViewById<LinearLayout>(androidx.appcompat.R.id.search_bar)?.layoutTransition =
-      LayoutTransition()
-
-    searchView.apply {
-      isQueryRefinementEnabled = true
-      setIconifiedByDefault(false)
-      setSearchableInfo(searchManager.getSearchableInfo(componentName))
-      setOnQueryTextListener(this@CloudRulesActivity)
-    }
-
-    // Bug of DayNight lib
-    showSystemApp?.apply {
-      setTitle(
-        if (GlobalValues.showSystemApps) {
-          R.string.menu_hide_system_app
-        } else {
-          R.string.menu_show_system_app
-        }
-      )
-    }
-
-    if (!isListReady) {
-      menu.findItem(R.id.search).isVisible = false
-    }
-
-    return true
-  }
-
-  override fun onQueryTextSubmit(query: String): Boolean {
-    return false
-  }
-
-  override fun onQueryTextChange(newText: String): Boolean {
+  private fun doFilter(newText: String) {
     val filter = mList.filter {
       it.name.contains(newText, ignoreCase = true)
     }
     mAdapter.setDiffNewData(filter.toMutableList())
-    return false
   }
 
   private fun requestRules() {
@@ -129,7 +87,7 @@ class CloudRulesActivity : AppBarActivity<ActivityCloudRulesBinding>(),
           mAdapter.setList(list)
           mList = list
         }
-        getToolBar().menu?.findItem(R.id.search)?.isVisible = true
+        binding.toolbar.tilSearch.isVisible = true
         binding.progressHorizontal.hide()
         isListReady = true
       }

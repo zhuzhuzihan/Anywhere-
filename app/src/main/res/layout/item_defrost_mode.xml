@@ -32,8 +32,7 @@
       android:id="@+id/tv_title"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textAppearance="?attr/textAppearanceBody1"
-      android:textStyle="bold"
+      android:textAppearance="?attr/textAppearanceBodyLarge"
       tools:text="Title text" />
 
     <TextView
@@ -41,7 +40,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="5dp"
-      android:textAppearance="?attr/textAppearanceBody2"
+      android:textAppearance="?attr/textAppearanceBodyMedium"
       android:textColor="?attr/colorOnSurfaceVariant"
       tools:text="Summary text" />
 
@@ -50,22 +49,23 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="5dp"
-      android:textAppearance="?attr/textAppearanceBody2"
+      android:textAppearance="?attr/textAppearanceBodyMedium"
       android:textColor="?attr/colorOnSurfaceVariant"
       tools:text="Addition text" />
 
   </LinearLayout>
 
-  <androidx.appcompat.widget.AppCompatTextView
+  <TextView
     android:id="@+id/button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackgroundBorderless"
+    android:fontFamily="sans-serif-medium"
     android:paddingVertical="8dp"
     android:paddingStart="0dp"
     android:paddingEnd="8dp"
-    android:textColor="@color/colorPrimary"
-    app:fontFamily="sans-serif-medium"
+    android:textAppearance="?attr/textAppearanceLabelLarge"
+    android:textColor="?attr/colorPrimary"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ll_container"
     tools:text="Button" />

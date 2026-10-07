@@ -11,8 +11,7 @@
     android:id="@+id/tv_app_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?attr/textAppearanceBody1"
-    android:textStyle="bold"
+    android:textAppearance="?attr/textAppearanceBodyLarge"
     tools:text="App Name" />
 
   <TextView

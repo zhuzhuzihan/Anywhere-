@@ -25,14 +25,12 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Tile" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
       android:id="@+id/iv_app_icon"
       android:layout_width="@dimen/app_icon_size"
       android:layout_height="@dimen/app_icon_size"
       android:layout_marginStart="@dimen/cardview_item_margin"
       android:layout_marginTop="@dimen/cardview_item_margin"
-      app:backgroundTint="@color/material_on_surface_emphasis_medium"
-      app:backgroundTintMode="add"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 

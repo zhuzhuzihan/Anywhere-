@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Toolbar variant with a persistent M3 filter field underneath.
+     Used by list screens (was: AppCompat SearchView action view).
+     Ids app_bar / tool_bar match toolbar.xml so view-binding call sites
+     (binding.toolbar.toolBar) keep working; the field is binding.toolbar.tilSearch. -->
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/app_bar"
+  style="@style/Widget.Material3Expressive.AppBarLayout"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:fitsSystemWindows="true">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tool_bar"
+    style="@style/Widget.Material3Expressive.Toolbar.Surface"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_search"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="8dp"
+    android:hint="@string/menu_search"
+    app:shapeAppearance="@style/ShapeAppearance.M3.Sys.Shape.Corner.Full"
+    app:startIconDrawable="@drawable/ic_search">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/et_search"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:imeOptions="actionSearch"
+      android:inputType="text"
+      android:singleLine="true" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

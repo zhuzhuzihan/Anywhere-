@@ -7,15 +7,13 @@
   android:layout_height="wrap_content"
   android:foreground="?attr/selectableItemBackground">
 
-  <androidx.appcompat.widget.AppCompatImageView
+  <ImageView
     android:id="@+id/iv_app_icon"
     android:layout_width="45dp"
     android:layout_height="45dp"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    app:backgroundTint="@color/material_on_surface_emphasis_medium"
-    app:backgroundTintMode="add"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -27,8 +25,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    android:textAppearance="?attr/textAppearanceBody1"
-    android:textStyle="bold"
+    android:textAppearance="?attr/textAppearanceBodyLarge"
     app:layout_constraintStart_toEndOf="@+id/iv_app_icon"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="App Name" />
@@ -41,7 +38,8 @@
     android:layout_marginTop="5dp"
     android:layout_marginEnd="10dp"
     android:fontFamily="sans-serif-condensed"
-    android:textAppearance="?attr/textAppearanceBody2"
+    android:textAppearance="?attr/textAppearanceBodyMedium"
+    android:textColor="?attr/colorOnSurfaceVariant"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/iv_app_icon"
     app:layout_constraintTop_toBottomOf="@+id/tv_app_name"
