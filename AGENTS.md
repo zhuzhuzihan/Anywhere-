@@ -23,7 +23,7 @@ Android app (Anywhere-). Two Gradle modules: `:app` (the app, `com.absinthe.anyw
   - `R.attr.awColorPrimary` (own attr, aliased to `?attr/colorPrimary` in `Base.AppTheme`) exists because material 1.14's R is non-transitive: `com.google.android.material.R.attr.colorPrimary` no longer resolves. Do not "simplify" it back to the material R ref.
   - `compileSdk 35` makes `PackageInfo.applicationInfo` nullable (`ApplicationInfo?`) — handle null, don't `!!` in list paths.
 - Entrypoints: `AnywhereApplication.kt` (AppCenter/Once/MMKV/Sui init), Room stack in `database/` (`AnywhereRoomDatabase`, `AnywhereDao`, `AnywhereRepository`), per-feature UI under `ui/` (`main`, `editor`, `list`, `shortcuts`, `qrcode`, `backup`, `settings`, …). `minSdk 26`, `targetSdk 35`, `resourceConfigurations` limited to `en`, `zh-rCN/TW/HK`.
-- CI (`.github/workflows/android.yml`): runs on push to `master` + PRs; commit message starting `[skip ci]` skips the build job. Signing/mapping/App Center steps are gated on `zhaobozhen/Anywhere-` non-PR builds.
+- CI (`.github/workflows/android.yml`): runs on push to `master` + PRs; commit message starting `[skip ci]` skips the build job. Actions are pinned working: checkout v4, setup-java v4, upload-artifact v4. The AppCenter mapping-upload step was removed (action repo gone, blocks job setup; TODO with restore command in the file). Signing/mapping-telegram steps are gated on `zhaobozhen/Anywhere-` non-PR builds, so on forks only build + mappings-artifact run. `optimizeReleaseRes` locates `resources-release-optimize.ap_` dynamically (AGP moves it) and warn-skips if absent — don't re-hardcode the path.
 
 ## Conventions
 
