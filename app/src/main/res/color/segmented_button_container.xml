@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Checked fill for the working-mode segmented buttons.
+     Token-only (dynamic-safe): secondaryContainer selected, transparent rest.
+     This intentionally overrides the library default (inverseSurface) to match
+     the M3 segmented-button spec / Compose SegmentedButton. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:color="?attr/colorSecondaryContainer" android:state_checked="true" />
+  <item android:color="@android:color/transparent" />
+</selector>
