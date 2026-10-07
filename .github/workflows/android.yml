@@ -76,6 +76,17 @@ jobs:
         with:
           name: apk-unsigned
           path: "app/build/outputs/apk/release/*.apk"
+      # Debug builds skip the release anti-tamper checks (signature/
+      # PoliceMan in AnywhereApplication), so they run when re-signed.
+      - name: Build debug APK
+        if: success() && steps.sign.conclusion == 'skipped'
+        run: bash ./gradlew assembleDebug
+      - name: Upload debug apk
+        if: success() && steps.sign.conclusion == 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-debug
+          path: "app/build/outputs/apk/debug/*.apk"
       - name: Get apk info
         if: success() && github.event_name != 'pull_request' && github.repository == 'zhaobozhen/Anywhere-'
         id: apk-info
