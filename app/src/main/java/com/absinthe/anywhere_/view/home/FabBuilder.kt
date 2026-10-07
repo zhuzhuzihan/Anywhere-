@@ -64,7 +64,7 @@ object FabBuilder {
   private fun create(context: Context, id: Int, iconRes: Int, label: String): SpeedDialActionItem {
     return SpeedDialActionItem.Builder(id, iconRes)
       .setFabBackgroundColor(context.getColorByAttr(com.google.android.material.R.attr.colorSurface))
-      .setFabImageTintColor(context.getColorByAttr(com.google.android.material.R.attr.colorPrimary))
+      .setFabImageTintColor(context.getColorByAttr(com.absinthe.anywhere_.R.attr.awColorPrimary))
       .setLabel(label)
       .setLabelClickable(false)
       .create()

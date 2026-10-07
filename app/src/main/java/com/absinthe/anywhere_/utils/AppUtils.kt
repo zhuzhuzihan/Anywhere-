@@ -138,13 +138,14 @@ object AppUtils {
       val packageInfos = packageManager.getInstalledPackages(0)
 
       for (packageInfo in packageInfos) {
+        val appInfo = packageInfo.applicationInfo ?: continue
         //Filter system apps
         if (!showSystem) {
-          if (ApplicationInfo.FLAG_SYSTEM and packageInfo.applicationInfo.flags != 0) {
+          if (ApplicationInfo.FLAG_SYSTEM and appInfo.flags != 0) {
             continue
           }
         }
-        if (packageInfo.applicationInfo.loadIcon(packageManager) == null) {
+        if (appInfo.loadIcon(packageManager) == null) {
           continue
         }
 
@@ -153,11 +154,11 @@ object AppUtils {
           packageName = packageInfo.packageName,
           appName = AppUtils.getAppName(packageInfo.packageName),
           icon = if (GlobalValues.iconPack == Const.DEFAULT_ICON_PACK || GlobalValues.iconPack.isEmpty()) {
-            packageInfo.applicationInfo.loadIcon(packageManager)
+            appInfo.loadIcon(packageManager)
           } else {
             com.absinthe.anywhere_.model.Settings.iconPack?.getDrawableIconForPackage(
               packageInfo.packageName,
-              packageInfo.applicationInfo.loadIcon(packageManager)
+              appInfo.loadIcon(packageManager)
             )
               ?: ContextCompat.getDrawable(Utils.getApp(), R.drawable.ic_logo)!!
           },

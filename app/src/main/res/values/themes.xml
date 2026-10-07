@@ -29,6 +29,9 @@
 
     <item name="bottomSheetHeaderHandlerColor">@color/bottom_sheet_header_handler</item>
     <item name="bottomSheetHeaderHandlerColorActivated">@color/bottom_sheet_header_handler_activated</item>
+
+    <!-- App-owned alias of ?attr/colorPrimary (see attrs.xml). -->
+    <item name="awColorPrimary">?attr/colorPrimary</item>
   </style>
 
   <style name="Theme" parent="Base.AppTheme" />

@@ -4,4 +4,11 @@
     <attr name="bottomSheetHeaderHandlerColor" format="color" />
     <attr name="bottomSheetHeaderHandlerColorActivated" format="color" />
   </declare-styleable>
+
+  <!-- Alias for ?attr/colorPrimary as an app-owned attr id.
+       Needed because material 1.14 has non-transitive R classes, so
+       com.google.android.material.R.attr.colorPrimary no longer resolves
+       (it used to leak through from appcompat). The theme item below keeps
+       the runtime value identical, including dynamic colors. -->
+  <attr name="awColorPrimary" format="color" />
 </resources>
