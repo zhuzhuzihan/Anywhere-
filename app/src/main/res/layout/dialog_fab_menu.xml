@@ -28,7 +28,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_advanced_card" />
+      app:srcCompat="@drawable/ic_m3_add_card" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_logo" />
+      app:srcCompat="@drawable/ic_m3_touch_app" />
 
     <TextView
       android:id="@+id/tv_collector_label"
@@ -88,7 +88,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_activity_list" />
+      app:srcCompat="@drawable/ic_m3_apps" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_qr_code" />
+      app:srcCompat="@drawable/ic_m3_qr_code" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_cloud_backup" />
+      app:srcCompat="@drawable/ic_m3_cloud_download" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
       android:layout_height="24dp"
       android:importantForAccessibility="no"
       android:tint="?attr/colorOnSurfaceVariant"
-      app:srcCompat="@drawable/ic_add_shortcut" />
+      app:srcCompat="@drawable/ic_m3_open_in_new" />
 
     <TextView
       android:layout_width="wrap_content"
