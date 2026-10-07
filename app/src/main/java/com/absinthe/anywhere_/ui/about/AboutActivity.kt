@@ -178,14 +178,6 @@ class AboutActivity : AbsAboutActivity() {
       )
       add(
         License(
-          "FloatingActionButtonSpeedDial",
-          "leinardi",
-          License.APACHE_2,
-          "https://github.com/leinardi/FloatingActionButtonSpeedDial"
-        )
-      )
-      add(
-        License(
           "colorpicker",
           "QuadFlask",
           License.APACHE_2,

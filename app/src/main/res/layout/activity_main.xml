@@ -71,19 +71,15 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.absinthe.anywhere_.view.home.MySpeedDialView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
           android:id="@+id/fab"
+          style="@style/Widget.Material3Expressive.FloatingActionButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="bottom|end"
-          android:clipToPadding="false"
-          android:padding="16dp"
-          app:layout_behavior="@string/speeddial_scrolling_view_snackbar_behavior"
-          app:sdMainFabClosedBackgroundColor="?attr/colorSecondaryContainer"
-          app:sdMainFabClosedIconColor="?attr/colorOnSecondaryContainer"
-          app:sdMainFabClosedSrc="@drawable/ic_add"
-          app:sdMainFabOpenedBackgroundColor="?attr/colorPrimary"
-          app:sdMainFabOpenedIconColor="?attr/colorOnPrimary" />
+          android:layout_margin="16dp"
+          android:contentDescription="@string/drawer_tool_add"
+          app:srcCompat="@drawable/ic_add" />
 
       </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

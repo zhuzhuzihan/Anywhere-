@@ -68,7 +68,7 @@ import com.absinthe.anywhere_.utils.handler.Opener
 import com.absinthe.anywhere_.utils.manager.CardTypeIconGenerator
 import com.absinthe.anywhere_.utils.manager.DialogManager.showAdvancedCardSelectDialog
 import com.absinthe.anywhere_.utils.manager.URLManager
-import com.absinthe.anywhere_.view.home.FabBuilder.build
+import com.absinthe.anywhere_.ui.dialog.FabMenuBottomSheetDialogFragment
 import com.absinthe.anywhere_.viewmodel.AnywhereViewModel
 import com.absinthe.libraries.utils.extensions.dp
 import com.blankj.utilcode.util.ActivityUtils
@@ -81,7 +81,6 @@ import com.chad.library.adapter.base.entity.node.BaseNode
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.microsoft.appcenter.analytics.Analytics
 import it.sephiroth.android.library.xtooltip.ClosePolicy.Companion.TOUCH_ANYWHERE_CONSUME
 import it.sephiroth.android.library.xtooltip.Tooltip
@@ -92,7 +91,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>(),
+  FabMenuBottomSheetDialogFragment.OnFabActionSelectedListener {
 
   private val viewModel by viewModels<AnywhereViewModel>()
   private lateinit var mItemTouchHelper: ItemTouchHelper
@@ -266,9 +266,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
       binding.drawer.isDrawerVisible(GravityCompat.START) -> {
         binding.drawer.closeDrawer(GravityCompat.START)
       }
-      binding.fab.isOpen -> {
-        binding.fab.close()
-      }
       else -> {
         backupIfNeeded()
         finish()
@@ -321,14 +318,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
               if (isTitleShown) {
                 binding.tsTitle.setText(it[pos].title)
-              }
-            }
-          })
-
-          registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrollStateChanged(state: Int) {
-              if (binding.fab.isOpen) {
-                binding.fab.close()
               }
             }
           })
@@ -528,52 +517,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
   }
 
   private fun initFab() {
-    build(binding.fab)
     binding.fab.apply {
-      mainFab.transitionName = "item_container"
+      transitionName = "item_container"
       translationY = -16.dp.toFloat()
-      setOnActionSelectedListener { actionItem: SpeedDialActionItem ->
-        when (actionItem.id) {
-          R.id.fab_advanced -> showAdvancedCardSelectDialog(this@MainActivity)
-          R.id.fab_activity_list -> {
-            startActivity(Intent(this@MainActivity, AppListActivity::class.java))
-            Analytics.trackEvent(EventTag.FAB_ACTIVITY_LIST_CLICK)
-          }
-          R.id.fab_collector -> {
-            viewModel.startCollector(
-              this@MainActivity,
-              object : AnywhereViewModel.OnStartCollectorListener {
-                override fun onStart() {
-                  if (isBound) {
-                    collectorService?.startCollector()
-                    ActivityUtils.startHomeActivity()
-                  } else {
-                    bindService(
-                      Intent(this@MainActivity, CollectorService::class.java),
-                      conn,
-                      Context.BIND_AUTO_CREATE
-                    )
-                  }
-                }
-              })
-            Analytics.trackEvent(EventTag.FAB_COLLECTOR_CLICK)
-          }
-          R.id.fab_qr_code_collection -> {
-            startActivity(Intent(this@MainActivity, QRCodeCollectionActivity::class.java))
-            Analytics.trackEvent(EventTag.FAB_QR_CODE_COLLECTION_CLICK)
-          }
-          R.id.fab_cloud_rules -> {
-            startActivity(Intent(this@MainActivity, CloudRulesActivity::class.java))
-            Analytics.trackEvent(EventTag.FAB_CLOUD_RULES_CLICK)
-          }
-          R.id.fab_third_apps_shortcut -> {
-            startActivity(Intent(this@MainActivity, ThirdAppsShortcutActivity::class.java))
-            Analytics.trackEvent(EventTag.FAB_THIRD_APPS_SHORTCUT_CLICK)
-          }
-          else -> return@setOnActionSelectedListener false
-        }
-        close()
-        true
+      setOnClickListener {
+        FabMenuBottomSheetDialogFragment().show(supportFragmentManager, "fab_menu")
       }
     }
 
@@ -587,6 +535,47 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
       })
 
       Once.markDone(OnceTag.FAB_TIP)
+    }
+  }
+
+  override fun onFabActionSelected(id: Int) {
+    when (id) {
+      R.id.fab_advanced -> showAdvancedCardSelectDialog(this@MainActivity)
+      R.id.fab_activity_list -> {
+        startActivity(Intent(this@MainActivity, AppListActivity::class.java))
+        Analytics.trackEvent(EventTag.FAB_ACTIVITY_LIST_CLICK)
+      }
+      R.id.fab_collector -> {
+        viewModel.startCollector(
+          this@MainActivity,
+          object : AnywhereViewModel.OnStartCollectorListener {
+            override fun onStart() {
+              if (isBound) {
+                collectorService?.startCollector()
+                ActivityUtils.startHomeActivity()
+              } else {
+                bindService(
+                  Intent(this@MainActivity, CollectorService::class.java),
+                  conn,
+                  Context.BIND_AUTO_CREATE
+                )
+              }
+            }
+          })
+        Analytics.trackEvent(EventTag.FAB_COLLECTOR_CLICK)
+      }
+      R.id.fab_qr_code_collection -> {
+        startActivity(Intent(this@MainActivity, QRCodeCollectionActivity::class.java))
+        Analytics.trackEvent(EventTag.FAB_QR_CODE_COLLECTION_CLICK)
+      }
+      R.id.fab_cloud_rules -> {
+        startActivity(Intent(this@MainActivity, CloudRulesActivity::class.java))
+        Analytics.trackEvent(EventTag.FAB_CLOUD_RULES_CLICK)
+      }
+      R.id.fab_third_apps_shortcut -> {
+        startActivity(Intent(this@MainActivity, ThirdAppsShortcutActivity::class.java))
+        Analytics.trackEvent(EventTag.FAB_THIRD_APPS_SHORTCUT_CLICK)
+      }
     }
   }
 
