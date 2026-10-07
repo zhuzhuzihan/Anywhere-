@@ -11,4 +11,6 @@
        (it used to leak through from appcompat). The theme item below keeps
        the runtime value identical, including dynamic colors. -->
   <attr name="awColorPrimary" format="color" />
+  <!-- Alias target for Java-side tonal lookups; value set in Base.AppTheme. -->
+  <attr name="awSurfaceContainerHighest" format="color" />
 </resources>

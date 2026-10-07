@@ -29,7 +29,7 @@
       android:layout_height="wrap_content"
       android:fontFamily="sans-serif-condensed-medium"
       android:text="@string/bsd_a11y_menu_click_text"
-      android:textSize="12sp"
+      android:textAppearance="?attr/textAppearanceBodySmall"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +71,7 @@
       android:layout_height="wrap_content"
       android:fontFamily="sans-serif-condensed"
       android:text="@string/bsd_a11y_contains"
-      android:textSize="10sp"
+      android:textAppearance="?attr/textAppearanceLabelSmall"
       app:layout_constraintEnd_toEndOf="@id/switch_contains"
       app:layout_constraintStart_toStartOf="@id/switch_contains"
       app:layout_constraintTop_toBottomOf="@id/switch_contains"
@@ -105,7 +105,7 @@
       android:layout_marginEnd="4dp"
       android:fontFamily="sans-serif-condensed"
       android:text="@string/bsd_workflow_delay_time"
-      android:textSize="12sp"
+      android:textAppearance="?attr/textAppearanceBodySmall"
       app:layout_constraintBottom_toBottomOf="@id/et_delay_time"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/et_delay_time" />
@@ -120,7 +120,7 @@
       android:importantForAutofill="no"
       android:inputType="number"
       android:maxLength="6"
-      android:textSize="12sp"
+      android:textAppearance="?attr/textAppearanceBodySmall"
       app:layout_constraintStart_toEndOf="@id/tv_delay_time"
       app:layout_constraintTop_toBottomOf="@id/til_activity_id"
       tools:ignore="HardcodedText" />

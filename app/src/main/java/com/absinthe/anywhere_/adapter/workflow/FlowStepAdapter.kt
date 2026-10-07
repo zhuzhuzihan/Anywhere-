@@ -11,6 +11,7 @@ import com.absinthe.anywhere_.model.viewholder.FlowStepBean
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.DraggableModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.google.android.material.color.MaterialColors
 
 class FlowStepAdapter : BaseQuickAdapter<FlowStepBean, BaseViewHolder>(R.layout.item_workflow),
   DraggableModule {
@@ -19,11 +20,23 @@ class FlowStepAdapter : BaseQuickAdapter<FlowStepBean, BaseViewHolder>(R.layout.
     if (item.entity == null) {
       holder.getView<TextView>(R.id.tv_app_name).apply {
         text = "               "
-        setBackgroundColor(ContextCompat.getColor(context, R.color.gray))
+        setBackgroundColor(
+          MaterialColors.getColor(
+            context,
+            R.attr.awSurfaceContainerHighest,
+            ContextCompat.getColor(context, R.color.gray)
+          )
+        )
       }
       holder.getView<TextView>(R.id.tv_card_type).apply {
         text = "                            "
-        setBackgroundColor(ContextCompat.getColor(context, R.color.gray))
+        setBackgroundColor(
+          MaterialColors.getColor(
+            context,
+            R.attr.awSurfaceContainerHighest,
+            ContextCompat.getColor(context, R.color.gray)
+          )
+        )
       }
       holder.getView<EditText>(R.id.et_delay_time).apply {
         setText("")

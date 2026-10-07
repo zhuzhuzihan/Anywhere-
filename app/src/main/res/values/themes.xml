@@ -32,6 +32,10 @@
 
     <!-- App-owned alias of ?attr/colorPrimary (see attrs.xml). -->
     <item name="awColorPrimary">?attr/colorPrimary</item>
+
+    <!-- App-owned alias of ?attr/colorSurfaceContainerHighest for Java-side
+         tonal lookups (MaterialColors) without touching material R. -->
+    <item name="awSurfaceContainerHighest">?attr/colorSurfaceContainerHighest</item>
   </style>
 
   <style name="Theme" parent="Base.AppTheme" />

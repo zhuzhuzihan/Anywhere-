@@ -42,7 +42,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="5dp"
       android:textAppearance="?attr/textAppearanceBody2"
-      android:textColor="#FF757575"
+      android:textColor="?attr/colorOnSurfaceVariant"
       tools:text="Summary text" />
 
     <TextView
@@ -51,7 +51,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="5dp"
       android:textAppearance="?attr/textAppearanceBody2"
-      android:textColor="#FF808080"
+      android:textColor="?attr/colorOnSurfaceVariant"
       tools:text="Addition text" />
 
   </LinearLayout>

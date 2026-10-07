@@ -19,7 +19,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="@drawable/ic_done"
-      android:backgroundTint="@color/green_done"
+      android:backgroundTint="?attr/colorPrimary"
       android:contentDescription="@string/initialize_done_todo"
       android:visibility="invisible"
       app:layout_constraintEnd_toEndOf="parent"
