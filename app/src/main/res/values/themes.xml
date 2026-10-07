@@ -27,11 +27,11 @@
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
 
-    <!-- Experimental: wash the whole window with the dynamic primaryContainer
-         tint so wallpaper-derived accents (e.g. the near-black checked toggle)
-         sit on a matching hue instead of plain white. Revert to
-         ?attr/colorSurface if it looks too strong. -->
-    <item name="android:windowBackground">?attr/colorPrimaryContainer</item>
+    <!-- Background wash: M3E container tint (FolkPatch-style dynamic look).
+         surfaceContainerLow carries the wallpaper seed hue subtly; Filled
+         cards sit one level above it. Do NOT use primaryContainer here —
+         full-screen pastel is too loud. -->
+    <item name="android:windowBackground">?attr/colorSurfaceContainerLow</item>
 
     <item name="bottomSheetHeaderHandlerColor">@color/bottom_sheet_header_handler</item>
     <item name="bottomSheetHeaderHandlerColorActivated">@color/bottom_sheet_header_handler_activated</item>
