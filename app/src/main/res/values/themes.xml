@@ -27,6 +27,12 @@
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
 
+    <!-- Experimental: wash the whole window with the dynamic primaryContainer
+         tint so wallpaper-derived accents (e.g. the near-black checked toggle)
+         sit on a matching hue instead of plain white. Revert to
+         ?attr/colorSurface if it looks too strong. -->
+    <item name="android:windowBackground">?attr/colorPrimaryContainer</item>
+
     <item name="bottomSheetHeaderHandlerColor">@color/bottom_sheet_header_handler</item>
     <item name="bottomSheetHeaderHandlerColorActivated">@color/bottom_sheet_header_handler_activated</item>
 
